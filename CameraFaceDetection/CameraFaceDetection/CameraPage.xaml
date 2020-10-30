@@ -1,0 +1,129 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:local1="clr-namespace:CameraFaceDetection.CustomCamera" xmlns:forms="clr-namespace:Lottie.Forms;assembly=Lottie.Forms"
+             x:Class="CameraFaceDetection.CameraPage">
+    <ContentPage.Content>
+        <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="6*"/>
+                <RowDefinition Height="3*"/>
+            </Grid.RowDefinitions>
+
+            <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Grid.Row="0">
+
+                <Grid>
+
+                    <Frame                 BackgroundColor="Black" 
+                                           BorderColor="LightBlue" 
+                                           HasShadow="False"  VerticalOptions="CenterAndExpand" 
+                                           Padding="0"  HorizontalOptions="CenterAndExpand" HeightRequest="230" WidthRequest="230"
+                                           CornerRadius="115"  Margin="20,10,20,10">
+                        <local1:CameraPreview  x:Name="CameraPreview" IsEnabled="False" IsVisible="False"
+                                                   HorizontalOptions="FillAndExpand" 
+                                                   VerticalOptions="FillAndExpand" Camera="Front"/>
+                    </Frame>
+                    <Frame
+                                           IsVisible="False" x:Name="WarningFrame" IsClippedToBounds="True"
+                                           BackgroundColor="Black" HasShadow="False"  VerticalOptions="CenterAndExpand" 
+                                           Padding="0"  HorizontalOptions="CenterAndExpand" HeightRequest="230" WidthRequest="230"
+                                           CornerRadius="115"  Margin="20,10,20,10">
+                        <StackLayout HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"
+                                         Orientation="Vertical"
+                                         >
+                            <forms:AnimationView x:Name="AnimationView"
+                         Animation="warning.json"
+                         Loop="True"                                    
+                         AutoPlay="True"
+                         HeightRequest="110"
+                         WidthRequest="110"
+                         IsVisible="True"
+                         HorizontalOptions="Center"
+                         VerticalOptions="Center"
+                         />
+                            <Label x:Name="errorlabel"                                       
+                                       TextColor="White"
+                                       HorizontalOptions="Center" Margin="0,5,0,0">
+                                <Label.FontFamily>
+                                    <OnPlatform x:TypeArguments="x:String">
+                                        <On Platform="iOS" Value="Questrial-Regular" />
+                                        <On Platform="Android" Value="Questrial-Regular.ttf#Questrial-Regular" />
+                                    </OnPlatform>
+                                </Label.FontFamily>
+                            </Label>
+                        </StackLayout>
+                    </Frame>
+
+                    <Frame 
+                                           IsVisible="False" x:Name="SuccessFrame" IsClippedToBounds="True"
+                                           BackgroundColor="Black"  HasShadow="False"  VerticalOptions="CenterAndExpand" 
+                                           Padding="0"  HorizontalOptions="CenterAndExpand" HeightRequest="230" WidthRequest="230"
+                                           CornerRadius="115"  Margin="20,10,20,10">
+                        <StackLayout HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"
+                                         Orientation="Vertical"
+                                         >
+                            <forms:AnimationView x:Name="SuccessAnimationView"
+                         Animation="success.json"
+                         Loop="False"                                    
+                         AutoPlay="False"
+                         HeightRequest="150"
+                         WidthRequest="150"
+                         IsVisible="True"
+                         HorizontalOptions="Center"
+                         VerticalOptions="Center"
+                         />
+                        </StackLayout>
+                    </Frame>
+
+                </Grid>
+
+            </StackLayout>
+
+            <StackLayout  Grid.Row="2" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" RowSpacing="30">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Grid.Row="0" >
+                        <Frame  x:Name="CaptureButtonOuterFrame" 
+                                                      HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"
+                                    HeightRequest="80" WidthRequest="80" CornerRadius="40"   Padding="0"
+                                   BackgroundColor="Transparent" BorderColor="White" >
+                            <StackLayout HorizontalOptions="Center" VerticalOptions="Center" IsClippedToBounds="True" >
+                                <Frame x:Name="CaptureButton" 
+                                                             HeightRequest="70" WidthRequest="70" 
+                                                             HorizontalOptions="Center" VerticalOptions="Center"
+                                         BackgroundColor="Snow" CornerRadius="35"  IsClippedToBounds="True" >
+                                    <Frame.GestureRecognizers>
+                                        <TapGestureRecognizer Tapped="Capture_Tapped"/>
+                                    </Frame.GestureRecognizers>
+                                </Frame>
+                            </StackLayout>
+                        </Frame>
+                    </StackLayout>
+                    <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Grid.Row="1" >
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <Image x:Name="switchCamera" 
+                                    Source="icon_switch_camera.png" HeightRequest="30" Grid.Column="1" HorizontalOptions="Center"
+                                   VerticalOptions="Center"
+                                   >
+                                <Image.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="CameraFlip_Tapped"/>
+                                </Image.GestureRecognizers>
+                            </Image>
+
+                        </Grid>
+                    </StackLayout>
+
+                </Grid>
+            </StackLayout>
+
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>
