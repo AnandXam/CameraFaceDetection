@@ -18,18 +18,28 @@ namespace CameraFaceDetection
 
         private async void Open_Camera(object sender, EventArgs e)
         {
-            var PhotoRequeststatus = await Permissions.RequestAsync<Permissions.Camera>();
-            var StorageRequStatus = await Permissions.RequestAsync<Permissions.StorageWrite>();
-            if(PhotoRequeststatus != Xamarin.Essentials.PermissionStatus.Granted || StorageRequStatus != Xamarin.Essentials.PermissionStatus.Granted)
+            try
             {
-                await DisplayAlert("Enable Permission", "Please allow camera permission", "Close");
+                var PhotoRequeststatus = await Permissions.RequestAsync<Permissions.Camera>();
+                var StorageRequStatus = await Permissions.RequestAsync<Permissions.StorageWrite>();
+                if (PhotoRequeststatus != Xamarin.Essentials.PermissionStatus.Granted || StorageRequStatus != Xamarin.Essentials.PermissionStatus.Granted)
+                {
+                    await DisplayAlert("Enable Permission", "Please allow camera permission", "Close");
+                }
+                else
+                {
+
+                    await Navigation.PushModalAsync(new CameraPage());
+
+                }
             }
-            else
+
+            catch(Exception ex)
             {
-   
-                await Navigation.PushModalAsync(new CameraPage());
 
             }
+
+          
 
 
         }
